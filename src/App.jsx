@@ -16,17 +16,38 @@ function App() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    // 从public/data目录加载职业数据
-    fetch('/data/rareJobs.json')
+    // 从public/data目录加载CSV数据
+    fetch('/data/----_副本.csv')
       .then(response => {
         if (!response.ok) {
           throw new Error('数据加载失败')
         }
-        return response.json()
+        return response.text()
       })
-      .then(data => {
-        console.log('加载的职业数据:', data.jobs) // 添加日志
-        setJobs(data.jobs)
+      .then(csvText => {
+        Papa.parse(csvText, {
+          header: true,
+          complete: (results) => {
+            const formattedJobs = results.data.map(job => ({
+              id: parseInt(job['序号']),
+              name: job['职业名称'],
+              description: job['简介'],
+              salary: {
+                min: parseInt(job['薪资区间'].split('-')[0].replace(/[^0-9]/g, '')),
+                max: parseInt(job['薪资区间'].split('-')[1].replace(/[^0-9]/g, '')),
+                unit: job['薪资区间'].match(/[^0-9-]+/)[0]
+              },
+              experience: job['从业者自述/经验'].replace(/[""]/g, ''),
+              requirements: [] // CSV中没有技能要求字段，暂时留空
+            }))
+            console.log('加载的职业数据:', formattedJobs)
+            setJobs(formattedJobs)
+          },
+          error: (error) => {
+            console.error('CSV解析错误:', error)
+            setError('数据解析失败，请刷新页面重试')
+          }
+        })
       })
       .catch(error => {
         console.error('Error loading jobs data:', error)
@@ -43,7 +64,7 @@ function App() {
 
   const getRandomJob = () => {
     if (jobs.length === 0) {
-      console.log('没有可用的职业数据') // 添加日志
+      console.log('没有可用的职业数据')
       return
     }
     
@@ -51,7 +72,7 @@ function App() {
     // 模拟加载延迟
     setTimeout(() => {
       const randomIndex = Math.floor(Math.random() * jobs.length)
-      console.log('随机选择的职业:', jobs[randomIndex]) // 添加日志
+      console.log('随机选择的职业:', jobs[randomIndex])
       setCurrentJob(jobs[randomIndex])
       setIsLoading(false)
     }, 1000)
