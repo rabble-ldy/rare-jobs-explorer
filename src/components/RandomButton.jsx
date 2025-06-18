@@ -3,16 +3,9 @@ function RandomButton({ onClick, isLoading }) {
     <button
       onClick={onClick}
       disabled={isLoading}
-      className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+      className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-4 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {isLoading ? (
-        <div className="flex items-center justify-center">
-          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-          <span>加载中...</span>
-        </div>
-      ) : (
-        "随机探索职业"
-      )}
+      {isLoading ? '探索中...' : '开启职业探索之旅'}
     </button>
   );
 }
