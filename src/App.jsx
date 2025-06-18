@@ -73,19 +73,21 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-12">
         {error && (
           <div className="text-center text-red-600 my-4">
             {error}
           </div>
         )}
         {!currentJob && (
-          <div className="text-center text-gray-600 my-8">
+          <div className="text-center text-gray-600 my-12">
             点击下方按钮，探索一个有趣的冷门职业
           </div>
         )}
-        <RandomButton onClick={getRandomJob} isLoading={isLoading} />
-        <JobCard job={currentJob} />
+        <div className="max-w-2xl mx-auto">
+          <RandomButton onClick={getRandomJob} isLoading={isLoading} />
+          <JobCard job={currentJob} />
+        </div>
         
         {/* 留言按钮 */}
         <div className="fixed bottom-8 right-8">
