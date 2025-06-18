@@ -101,7 +101,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F8F6F2' }}>
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-16">
+      <main className="flex-1 container mx-auto px-4 py-16" style={{ backgroundColor: '#F8F6F2' }}>
         {error && (
           <div className="text-center text-red-600 my-4 text-2xl">
             {error}
