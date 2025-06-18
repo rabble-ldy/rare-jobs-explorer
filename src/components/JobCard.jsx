@@ -2,31 +2,37 @@ function JobCard({ job }) {
   if (!job) return null;
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mt-8">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">{job.name}</h2>
-      <p className="text-gray-600 mb-6">{job.description}</p>
+    <div className="bg-white rounded-2xl shadow-xl p-8 w-full transform transition-all duration-300 hover:scale-[1.02]">
+      <h2 className="text-4xl font-bold text-gray-800 mb-6">{job.name}</h2>
       
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="bg-blue-50 rounded-lg p-4">
-          <h3 className="font-semibold text-blue-800 mb-2">薪资范围</h3>
-          <p className="text-blue-600">
+      <div className="space-y-6">
+        <div>
+          <h3 className="text-2xl font-semibold text-gray-700 mb-3">职业简介</h3>
+          <p className="text-xl text-gray-600 leading-relaxed">{job.description}</p>
+        </div>
+
+        <div>
+          <h3 className="text-2xl font-semibold text-gray-700 mb-3">薪资范围</h3>
+          <p className="text-xl text-gray-600">
             {job.salary.min} - {job.salary.max} {job.salary.unit}
           </p>
         </div>
-        
-        <div className="bg-green-50 rounded-lg p-4">
-          <h3 className="font-semibold text-green-800 mb-2">从业经验</h3>
-          <p className="text-green-600">{job.experience}</p>
-        </div>
-      </div>
 
-      <div className="mt-6">
-        <h3 className="font-semibold text-gray-800 mb-2">技能要求</h3>
-        <ul className="list-disc list-inside space-y-1">
-          {job.requirements.map((req, index) => (
-            <li key={index} className="text-gray-600">{req}</li>
-          ))}
-        </ul>
+        <div>
+          <h3 className="text-2xl font-semibold text-gray-700 mb-3">从业者自述</h3>
+          <p className="text-xl text-gray-600 leading-relaxed">{job.experience}</p>
+        </div>
+
+        {job.requirements && job.requirements.length > 0 && (
+          <div>
+            <h3 className="text-2xl font-semibold text-gray-700 mb-3">技能要求</h3>
+            <ul className="list-disc list-inside space-y-2">
+              {job.requirements.map((req, index) => (
+                <li key={index} className="text-xl text-gray-600">{req}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

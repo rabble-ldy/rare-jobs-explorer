@@ -99,19 +99,21 @@ function App() {
 
   // 探索页面
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F8F6F2' }}>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F8F6F2' }}>
       <Header />
-      <main className="container mx-auto px-4 py-16">
+      <main className="flex-1 container mx-auto px-4 py-16">
         {error && (
           <div className="text-center text-red-600 my-4 text-2xl">
             {error}
           </div>
         )}
-        <div className="max-w-3xl mx-auto">
-          <div className="mb-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-12">
             <RandomButton onClick={getRandomJob} isLoading={isLoading} />
           </div>
-          <JobCard job={currentJob} />
+          <div className="min-h-[60vh] flex items-center justify-center">
+            <JobCard job={currentJob} />
+          </div>
         </div>
         
         {/* 留言按钮 */}
