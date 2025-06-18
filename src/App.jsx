@@ -16,14 +16,21 @@ function App() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    // 从public目录加载职业数据
+    // 从public/data目录加载职业数据
     fetch('/data/rareJobs.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('数据加载失败')
+        }
+        return response.json()
+      })
       .then(data => {
+        console.log('加载的职业数据:', data.jobs) // 添加日志
         setJobs(data.jobs)
       })
       .catch(error => {
         console.error('Error loading jobs data:', error)
+        setError('数据加载失败，请刷新页面重试')
       })
   }, [])
 
@@ -35,12 +42,16 @@ function App() {
   }
 
   const getRandomJob = () => {
-    if (jobs.length === 0) return
+    if (jobs.length === 0) {
+      console.log('没有可用的职业数据') // 添加日志
+      return
+    }
     
     setIsLoading(true)
     // 模拟加载延迟
     setTimeout(() => {
       const randomIndex = Math.floor(Math.random() * jobs.length)
+      console.log('随机选择的职业:', jobs[randomIndex]) // 添加日志
       setCurrentJob(jobs[randomIndex])
       setIsLoading(false)
     }, 1000)
@@ -86,6 +97,11 @@ function App() {
     <div className="min-h-screen bg-gray-100">
       <Header />
       <main className="container mx-auto px-4 py-8">
+        {error && (
+          <div className="text-center text-red-600 my-4">
+            {error}
+          </div>
+        )}
         {!currentJob && (
           <div className="text-center text-gray-600 my-8">
             点击下方按钮，探索一个有趣的冷门职业
