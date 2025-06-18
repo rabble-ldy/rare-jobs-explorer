@@ -76,17 +76,19 @@ function App() {
   if (!hasStarted) {
     return (
       <div className="min-h-screen" style={{ backgroundColor: '#F8F6F2' }}>
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6" style={{ color: '#2C3E35' }}>冷门职业图鉴</h1>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+        <div className="container mx-auto px-4 py-24">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-6xl font-bold mb-8" style={{ color: '#2C3E35' }}>冷门职业图鉴</h1>
+            <p className="text-2xl text-gray-600 leading-relaxed mb-10">
               我们生活在一个大众的世界里，但总有人在做着小众的事情；发现更多职业的可能，而不是囚禁于"正确社会"的枷锁之中。
             </p>
-            <p className="text-lg text-gray-500 mb-12 italic">
+            <p className="text-xl text-gray-500 mb-16 italic">
               每一次点击，都是一次对未知的探索；每一个职业，都藏着一段独特的人生故事。
             </p>
-            <RandomButton onClick={getRandomJob} isLoading={isLoading} />
-            <p className="mt-12 text-sm text-gray-400">
+            <div className="mb-16">
+              <RandomButton onClick={getRandomJob} isLoading={isLoading} />
+            </div>
+            <p className="text-base text-gray-400">
               温馨提示：每个职业背后都有其独特的价值，让我们带着开放和好奇的心态去探索吧
             </p>
           </div>
@@ -99,14 +101,16 @@ function App() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F8F6F2' }}>
       <Header />
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-16">
         {error && (
-          <div className="text-center text-red-600 my-4">
+          <div className="text-center text-red-600 my-4 text-lg">
             {error}
           </div>
         )}
-        <div className="max-w-2xl mx-auto">
-          <RandomButton onClick={getRandomJob} isLoading={isLoading} />
+        <div className="max-w-3xl mx-auto">
+          <div className="mb-8">
+            <RandomButton onClick={getRandomJob} isLoading={isLoading} />
+          </div>
           <JobCard job={currentJob} />
         </div>
         
@@ -114,7 +118,7 @@ function App() {
         <div className="fixed bottom-8 right-8">
           <button
             onClick={() => setShowFeedback(true)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-full shadow-lg transition-all transform hover:scale-105 hover:shadow-xl"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-4 px-8 rounded-full shadow-lg transition-all transform hover:scale-105 hover:shadow-xl text-lg"
           >
             分享你的故事
           </button>
@@ -123,7 +127,7 @@ function App() {
         {/* 留言表单 */}
         {showFeedback && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full">
+            <div className="bg-white rounded-lg p-8 max-w-xl w-full">
               <FeedbackForm onClose={() => setShowFeedback(false)} />
             </div>
           </div>
