@@ -13,9 +13,7 @@ function FeedbackForm({ onClose }) {
     setSubmitStatus(null)
 
     try {
-      // 这里可以替换为您的表单提交服务
-      // 例如：EmailJS、Formspree 等
-      const response = await fetch('https://formspree.io/f/your-form-id', {
+      const response = await fetch('https://formspree.io/f/mdkzdljp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
