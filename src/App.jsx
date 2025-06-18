@@ -78,17 +78,17 @@ function App() {
       <div className="min-h-screen" style={{ backgroundColor: '#F8F6F2' }}>
         <div className="container mx-auto px-4 py-24">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-6xl font-bold mb-8" style={{ color: '#2C3E35' }}>冷门职业图鉴</h1>
-            <p className="text-2xl text-gray-600 leading-relaxed mb-10">
+            <h1 className="text-5xl font-bold mb-8" style={{ color: '#2C3E35' }}>冷门职业图鉴</h1>
+            <p className="text-3xl text-gray-600 leading-relaxed mb-10">
               我们生活在一个大众的世界里，但总有人在做着小众的事情；发现更多职业的可能，而不是囚禁于"正确社会"的枷锁之中。
             </p>
-            <p className="text-xl text-gray-500 mb-16 italic">
+            <p className="text-2xl text-gray-500 mb-16 italic">
               每一次点击，都是一次对未知的探索；每一个职业，都藏着一段独特的人生故事。
             </p>
             <div className="mb-16">
               <RandomButton onClick={getRandomJob} isLoading={isLoading} />
             </div>
-            <p className="text-base text-gray-400">
+            <p className="text-lg text-gray-400">
               温馨提示：每个职业背后都有其独特的价值，让我们带着开放和好奇的心态去探索吧
             </p>
           </div>
@@ -103,7 +103,7 @@ function App() {
       <Header />
       <main className="container mx-auto px-4 py-16">
         {error && (
-          <div className="text-center text-red-600 my-4 text-lg">
+          <div className="text-center text-red-600 my-4 text-xl">
             {error}
           </div>
         )}
@@ -118,7 +118,7 @@ function App() {
         <div className="fixed bottom-8 right-8">
           <button
             onClick={() => setShowFeedback(true)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-4 px-8 rounded-full shadow-lg transition-all transform hover:scale-105 hover:shadow-xl text-lg"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-4 px-8 rounded-full shadow-lg transition-all transform hover:scale-105 hover:shadow-xl text-xl"
           >
             分享你的故事
           </button>
