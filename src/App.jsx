@@ -13,6 +13,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   const [showFeedback, setShowFeedback] = useState(false)
+  const [hasStarted, setHasStarted] = useState(false)
 
   useEffect(() => {
     // 从public/data目录加载CSV数据
@@ -67,9 +68,28 @@ function App() {
       console.log('随机选择的职业:', jobs[randomIndex])
       setCurrentJob(jobs[randomIndex])
       setIsLoading(false)
+      setHasStarted(true)
     }, 1000)
   }
 
+  // 首页
+  if (!hasStarted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div className="container mx-auto px-4 py-12">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl font-bold text-gray-800 mb-6">冷门职业图鉴</h1>
+            <p className="text-xl text-gray-600 leading-relaxed mb-12">
+              我们生活在一个大众的世界里，但总有人在做着小众的事情；发现更多职业的可能，而不是囚禁于"正确社会"的枷锁之中。
+            </p>
+            <RandomButton onClick={getRandomJob} isLoading={isLoading} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // 探索页面
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
@@ -77,11 +97,6 @@ function App() {
         {error && (
           <div className="text-center text-red-600 my-4">
             {error}
-          </div>
-        )}
-        {!currentJob && (
-          <div className="text-center text-gray-600 my-12">
-            点击下方按钮，探索一个有趣的冷门职业
           </div>
         )}
         <div className="max-w-2xl mx-auto">
