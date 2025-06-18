@@ -13,16 +13,17 @@ function FeedbackForm({ onClose }) {
     setSubmitStatus(null)
 
     try {
+      const formData = new FormData()
+      formData.append('name', name)
+      formData.append('email', email)
+      formData.append('message', message)
+
       const response = await fetch('https://formspree.io/f/mdkzdljp', {
         method: 'POST',
+        body: formData,
         headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-        }),
+          'Accept': 'application/json'
+        }
       })
 
       if (response.ok) {
@@ -34,6 +35,7 @@ function FeedbackForm({ onClose }) {
           onClose()
         }, 2000)
       } else {
+        console.error('提交失败:', await response.text())
         setSubmitStatus('error')
       }
     } catch (error) {
