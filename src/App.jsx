@@ -5,15 +5,14 @@ import Header from './components/Header'
 import JobCard from './components/JobCard'
 import RandomButton from './components/RandomButton'
 import Footer from './components/Footer'
+import FeedbackForm from './components/FeedbackForm'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const [currentJob, setCurrentJob] = useState(null)
   const [jobs, setJobs] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [showFeedback, setShowFeedback] = useState(false)
 
   useEffect(() => {
     // 从public/data目录加载CSV数据
@@ -55,13 +54,6 @@ function App() {
       })
   }, [])
 
-  const handleLogin = (e) => {
-    e.preventDefault()
-    if (username && password) {
-      setIsLoggedIn(true)
-    }
-  }
-
   const getRandomJob = () => {
     if (jobs.length === 0) {
       console.log('没有可用的职业数据')
@@ -76,42 +68,6 @@ function App() {
       setCurrentJob(jobs[randomIndex])
       setIsLoading(false)
     }, 1000)
-  }
-
-  if (!isLoggedIn) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4">
-        <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-          <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">冷门职业图鉴</h2>
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div>
-              <input
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="请输入用户名"
-              />
-            </div>
-            <div>
-              <input
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="请输入密码"
-              />
-            </div>
-            <button
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98]"
-              type="submit"
-            >
-              登录
-            </button>
-          </form>
-        </div>
-      </div>
-    )
   }
 
   return (
@@ -130,6 +86,25 @@ function App() {
         )}
         <RandomButton onClick={getRandomJob} isLoading={isLoading} />
         <JobCard job={currentJob} />
+        
+        {/* 留言按钮 */}
+        <div className="fixed bottom-8 right-8">
+          <button
+            onClick={() => setShowFeedback(true)}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-full shadow-lg transition-all transform hover:scale-105"
+          >
+            给我留言
+          </button>
+        </div>
+
+        {/* 留言表单 */}
+        {showFeedback && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-lg p-6 max-w-md w-full">
+              <FeedbackForm onClose={() => setShowFeedback(false)} />
+            </div>
+          </div>
+        )}
       </main>
       <Footer />
     </div>
