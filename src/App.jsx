@@ -78,7 +78,7 @@ function App() {
       <div className="min-h-screen" style={{ backgroundColor: '#F8F6F2' }}>
         <div className="container mx-auto px-4 py-24">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-8" style={{ color: '#2C3E35' }}>冷门职业图鉴</h1>
+            <h1 className="text-5xl font-bold mb-8" style={{ color: '#2C3E35', fontFamily: 'LiSu, "Li Su", "STLiti", serif' }}>冷门职业图鉴</h1>
             <p className="text-3xl text-gray-600 leading-relaxed mb-10">
               我们生活在一个大众的世界里，但总有人在做着小众的事情；发现更多职业的可能，而不是囚禁于"正确社会"的枷锁之中。
             </p>
